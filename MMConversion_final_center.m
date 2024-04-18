@@ -288,17 +288,17 @@ for plane = 1:3
             info.ImageOrientationPatient = [1, 0, 0, 0, 0, -1];
             ImagePositionPatient = zeros(1,3);
             ImagePositionPatient(1) =  -image_spacing(1)*(image_size(1) - 1)/2+MMcenterX;
-            ImagePositionPatient(2) =  MMcenterY;
-            ImagePositionPatient(3) =  image_spacing(1)*(image_size(1) - 1)/2+MMcenterZ;
+            ImagePositionPatient(2) =  -MMcenterZ;
+            ImagePositionPatient(3) =  image_spacing(1)*(image_size(1) - 1)/2-MMcenterY;
             info.ImagePositionPatient = ImagePositionPatient;
         elseif plane == 2 
             info.SeriesDescription = 'SAGITTAL';
             info.ImageType = 'PRIMARY\SAGITTAL';
             info.ImageOrientationPatient = [0, 1, 0, 0, 0, -1];
             ImagePositionPatient = zeros(1,3);
-            ImagePositionPatient(1) =  MMcenterX;
-            ImagePositionPatient(2) =  -image_spacing(1)*(image_size(1) - 1)/2+MMcenterY;
-            ImagePositionPatient(3) =   image_spacing(1)*(image_size(1) - 1)/2+MMcenterZ;
+            ImagePositionPatient(1) =  MMcenterY;
+            ImagePositionPatient(2) =   -image_spacing(1)*(image_size(1) - 1)/2-MMcenterZ;
+            ImagePositionPatient(3) =   image_spacing(1)*(image_size(1) - 1)/2+MMcenterX;
             info.ImagePositionPatient = ImagePositionPatient;
         elseif plane == 3
             info.SeriesDescription = 'AXIAL';
@@ -307,7 +307,7 @@ for plane = 1:3
             ImagePositionPatient = zeros(1,3);
             ImagePositionPatient(1) = -image_spacing(1)*(image_size(1) - 1)/2+MMcenterX;
             ImagePositionPatient(2) = -image_spacing(1)*(image_size(1) - 1)/2+MMcenterY;
-            ImagePositionPatient(3) =  MMcenterZ;
+            ImagePositionPatient(3) =  -MMcenterZ;
             info.ImagePositionPatient = ImagePositionPatient;
 
         end
@@ -318,3 +318,10 @@ for plane = 1:3
         
     end
 end
+
+%% Coordinate for each plane
+
+MMcenter = [MMcenterX, MMcenterY, MMcenterZ]
+MMaxial = [MMcenterX, MMcenterY, -MMcenterZ]
+MMsagittal = [MMcenterY, -MMcenterZ, MMcenterX]
+MMcoronal = [MMcenterX, -MMcenterZ, -MMcenterY]
